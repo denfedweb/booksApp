@@ -1,0 +1,26 @@
+
+<h1>{{title}}</h1>
+
+<form action="/add" method="post">
+    <div class="uk-margin">
+        <label class="uk-form-label" for="title">Book name</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" name="title" id="title" type="text" placeholder="Some text..." required>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="price">Book price</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" name="price" id="price" type="number" placeholder="Some number..." required>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="image">Book image URL</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" name="image" id="image" type="text" placeholder="Some image URL..." required>
+        </div>
+    </div>
+    <button class="uk-button uk-button-default">Add book</button>
+</form>

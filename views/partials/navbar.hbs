@@ -1,0 +1,13 @@
+<nav class="uk-navbar-container uk-margin" uk-navbar>
+    <div class="uk-navbar-left">
+
+        <a class="uk-navbar-item uk-logo" href="/">Books App</a>
+
+        <ul class="uk-navbar-nav">
+            <li class="{{#if isHome}}uk-active{{/if}}"><a href="/">Home</a></li>
+            <li class="{{#if isBooks}}uk-active{{/if}}"><a href="/books">Books</a></li>
+            <li class="{{#if isAddPage}}uk-active{{/if}}"><a href="/add">Add Book</a></li>
+            <li class="{{#if isCart}}uk-active{{/if}}"><a href="/cart">Cart</a></li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,9 @@
+<div class="book">
+    <h1>{{book.title}}</h1>
+    <img src="{{book.image}}" alt="{{book.title}}">
+    <span class="card-price big">{{book.price}}</span>
+    <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="{{book.id}}">
+        <button class="uk-button uk-button-default">add to cart</button>
+    </form>
+</div>

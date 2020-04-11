@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+{{#if books.length}}
+    <div class="uk-child-width-1-2@m" uk-grid>
+        {{#forEach books}}
+            <div>
+                <div class="uk-card uk-card-hover uk-card-body">
+                    <div class="uk-card-media-top">
+                        <img class="js-targetLink" data-href="/books/{{id}}" src="{{image}}" alt="{{title}}">
+                    </div>
+                    <div class="uk-card-body">
+                        <a href="/books/{{id}}" target="_blank">
+                            <h3 class="uk-card-title">{{title}}</h3>
+                            <span class="card-price">{{price}}</span> <br>
+                        </a>
+                        <div class="card-button-block">
+                            <a href="/books/{{id}}/edit?allow=true" class="uk-button uk-button-default">edit book</a>
+                            <form action="/cart/add" method="post">
+                                <input type="hidden" name="id" value="{{id}}">
+                                <button class="uk-button uk-button-default">add to cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/forEach}}
+    </div>
+{{/if}}

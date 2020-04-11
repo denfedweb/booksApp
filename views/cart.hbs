@@ -1,0 +1,37 @@
+<h1>{{title}}</h1>
+<div id="cart">
+    {{#if books.length}}
+        <table class="uk-table uk-table-divider">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Count</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{#forEach books}}
+                    <tr>
+                        <td><a href="/books/{{id}}" target="_blank">{{title}}</a></td>
+                        <td class="card-price small">{{multiply price count}}</td>
+                        <td>
+                            <i class="fas fa-minus-circle cart-countToggle"></i>
+                            <span class="cart-count">{{count}}</span>
+                            <i class="fas fa-plus-circle cart-countToggle"></i>
+                        </td>
+                        <td>
+                            <form action="/cart/remove" method="post">
+                                <input type="hidden" name="id" value="{{id}}">
+                                <button class="clear-btn"><i class="fas fa-times delete-book"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                {{/forEach}}
+            </tbody>
+        </table>
+        Full price: <span class="card-price">{{price}}</span>
+    {{else}}
+        <p>Cart empty</p>
+    {{/if}}
+</div>
