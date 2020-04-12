@@ -12,15 +12,22 @@ document.querySelectorAll(".js-targetLink").forEach(e => {
 });
 
 const $cart = document.querySelector("#cart");
+const $btnQnt = document.querySelectorAll(".cart-countToggle");
+var timeoutBtn = null;
+if ($cart){
+    $btnQnt.forEach((e)=>{
+       e.addEventListener("click", function () {
+            let form = this.parentNode;
+            let qnt = form.querySelector(".cart-count");
+            let finalQnt = +this.dataset.qnt + +qnt.value;
+            if(finalQnt >= 1){
+                qnt.value = finalQnt;
+                clearTimeout(timeoutBtn);
+                timeoutBtn = setTimeout(function () {
+                    form.submit();
+                }, 800);
+            }
+       });
+    });
+}
 
-// if ($cart){
-//     $cart.addEventListener("click", (e) => {
-//         if(e.target.classList.contains('js-remove')){
-//             const id = e.target.id;
-//
-//             fetch(`/cart/remove/${id}`, {method: 'delete'}).then(res => res.json()).then(cart =>{
-//
-//             })
-//         }
-//     });
-// }

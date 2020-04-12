@@ -22,19 +22,7 @@ class Cart {
 
         cart.price += +book.price
 
-        return new Promise((resolve, reject)=>{
-            fs.writeFile(
-                p,
-                JSON.stringify(cart),
-                (err) => {
-                    if(err) {
-                        reject(err)
-                    } else {
-                        resolve();
-                    }
-                }
-            )
-        })
+        return await Cart.writeFile(cart);
     }
 
     static async fetch(){
@@ -56,6 +44,28 @@ class Cart {
         cart.price -= book.price * book.count;
         cart.books = cart.books.filter(c => c.id !== id);
 
+        return await Cart.writeFile(cart);
+    }
+
+    static async toggle(id, count){
+        const cart = await Cart.fetch();
+        const idx = cart.books.findIndex(c => c.id === id);
+        cart.books[idx].count = count;
+        return await Cart.writeFile(cart);
+    }
+
+    static async fullPrice(){
+        const cart = await Cart.fetch();
+        let price = 0;
+        cart.books.forEach(book => {
+            price += book.price * book.count;
+        });
+        console.log(price)
+        cart.price = price;
+        return await Cart.writeFile(cart);
+    }
+
+    static async writeFile(cart){
         return new Promise((resolve, reject)=>{
             fs.writeFile(
                 p,
