@@ -1,5 +1,6 @@
 const {Router} = require("express");
 const Book = require("../models/Book");
+const Cart = require("../models/Cart");
 const router = Router();
 
 router.get("/", async (req, res)=>{
@@ -26,6 +27,8 @@ router.get("/:id/edit", async (req, res)=>{
 
 router.post("/edit", async (req, res)=>{
     await Book.updateBook(req.body);
+    await Cart.updateBook(req.body);
+    await Cart.fullPrice();
     res.redirect("/books");
 });
 

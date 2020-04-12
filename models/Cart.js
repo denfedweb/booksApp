@@ -80,6 +80,14 @@ class Cart {
             )
         })
     }
+
+    static async updateBook(book){
+        const cart = await Cart.fetch();
+
+        const idx = cart.books.findIndex(b => b.id === book.id)
+        cart.books[idx] = {...cart.books[idx],...book};
+        return await Cart.writeFile(cart);
+    }
 }
 
 module.exports = Cart;
