@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
 }
-.uk-card{
+.book-card{
     height: 930px;
     border: 1px solid #ccc;
 }
@@ -78,4 +78,13 @@
 
 .cart-countToggle i {
     color: #666666;
+}
+
+.order-id{
+    font-size: 24px;
+    color: #666666;
+}
+
+.order-titles{
+    margin: 5px 0;
 }

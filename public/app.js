@@ -5,6 +5,18 @@ document.querySelectorAll(".card-price").forEach(node => {
     }).format(node.textContent)
 })
 
+const toDate = date =>{
+    return new Intl.DateTimeFormat('usd-USD', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    }).format(new Date(date))
+}
+
+document.querySelectorAll('.order-date').forEach(d =>{
+   d.textContent = toDate(d.textContent)
+});
+
 document.querySelectorAll(".js-targetLink").forEach(e => {
    e.addEventListener("click", function () {
         window.open(this.dataset.href, "_blank")

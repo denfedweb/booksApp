@@ -12,7 +12,7 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="price">Book price</label>
         <div class="uk-form-controls">
-            <input class="uk-input" name="price" value="{{book.price}}" id="price" type="number" placeholder="Some number..." required>
+            <input class="uk-input" name="price" value="{{book.price}}" id="price" type="number" placeholder="Some number..." min="1" required>
         </div>
     </div>
 
@@ -23,5 +23,11 @@
         </div>
     </div>
     <input type="hidden" name="id" value="{{book.id}}">
-    <button class="uk-button uk-button-default">edit book</button>
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button type="submit" class="uk-button uk-button-default">edit book</button>
+</form>
+<form action="/books/remove" method="post">
+    <input type="hidden" name="id" value="{{book.id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button type="submit" class="uk-button uk-button-default">remove book</button>
 </form>

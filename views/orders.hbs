@@ -1,0 +1,39 @@
+<h1>{{title}}</h1>
+
+{{#if orders.length}}
+    <div class="uk-grid-match" uk-grid>
+        {{#each orders}}
+            <div>
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                    <h3 class="uk-card-title">Order: <span class="order-id">{{_id}}</span></h3>
+                    <p class="order-titles">Name: <span>{{user.name}}</span></p>
+                    <p class="order-titles">Email: <span>{{user.email}}</span></p>
+                    <p class="order-titles">Date: <span class="order-date">{{date}}</span></p>
+                    <table class="uk-table uk-table-divider">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each books}}
+                            <tr>
+                                <td><a href="/books/{{book._id}}" target="_blank">{{book.title}}</a></td>
+                                <td class="card-price small">{{multiply book.price count}}</td>
+                                <td>
+                                    <span class="cart-count">{{count}}</span>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    Full price: <span class="card-price">{{price}}</span>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p>empty</p>
+{{/if}}

@@ -1,18 +1,28 @@
 const {Router} = require("express");
-const Book = require("../models/Book");
+const Book = require("../models/book");
+const auth = require("../middleware/auth");
 const router = Router();
 
-router.get("/", (req, res)=>{
+router.get("/", auth, (req, res)=>{
     res.render("add", {
         title: "Add book",
         isAddPage: true
     });
 });
 
-router.post("/", async (req, res)=>{
-    const book = new Book(req.body.title, req.body.price, req.body.image);
-    await book.save();
-    res.redirect("/books");
+router.post("/", auth, async (req, res)=>{
+    const book = new Book({
+       title: req.body.title,
+       price: req.body.price,
+       image: req.body.image,
+       userId: req.user
+    });
+    try {
+        await book.save();
+        res.redirect("/books");
+    } catch (e) {
+        console.error(e);
+    }
 });
 
 module.exports = router;

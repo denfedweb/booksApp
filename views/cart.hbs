@@ -11,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-                {{#forEach books}}
+                {{#each books}}
                     <tr>
                         <td><a href="/books/{{id}}" target="_blank">{{title}}</a></td>
                         <td class="card-price small">{{multiply price count}}</td>
@@ -21,19 +21,25 @@
                                 <i class="fas fa-minus-circle cart-countToggle" data-qnt="-1"></i>
                                 <input class="cart-count" type="number" name="count" value="{{count}}" min="1">
                                 <i class="fas fa-plus-circle cart-countToggle" data-qnt="1"></i>
+                                <input type="hidden" name="_csrf" value="{{@root.csrf}}">
                             </form>
                         </td>
                         <td>
                             <form action="/cart/remove" method="post">
                                 <input type="hidden" name="id" value="{{id}}">
+                                <input type="hidden" name="_csrf" value="{{@root.csrf}}">
                                 <button class="clear-btn"><i class="fas fa-times delete-book"></i></button>
                             </form>
                         </td>
                     </tr>
-                {{/forEach}}
+                {{/each}}
             </tbody>
         </table>
         Full price: <span class="card-price">{{price}}</span>
+        <form action="/orders" method="post">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+            <button type="submit" class="uk-button uk-button-default">Order</button>
+        </form>
     {{else}}
         <p>Cart empty</p>
     {{/if}}

@@ -6,8 +6,14 @@
         <ul class="uk-navbar-nav">
             <li class="{{#if isHome}}uk-active{{/if}}"><a href="/">Home</a></li>
             <li class="{{#if isBooks}}uk-active{{/if}}"><a href="/books">Books</a></li>
-            <li class="{{#if isAddPage}}uk-active{{/if}}"><a href="/add">Add Book</a></li>
-            <li class="{{#if isCart}}uk-active{{/if}}"><a href="/cart">Cart</a></li>
+            {{#if isAuth}}
+                <li class="{{#if isAddPage}}uk-active{{/if}}"><a href="/add">Add Book</a></li>
+                <li class="{{#if isCart}}uk-active{{/if}}"><a href="/cart">Cart</a></li>
+                <li class="{{#if isOrder}}uk-active{{/if}}"><a href="/orders">Orders</a></li>
+                <li><a href="/auth/logout">Log-out</a></li>
+            {{else}}
+                <li class="{{#if isLogin}}uk-active{{/if}}"><a href="/auth/login">Login</a></li>
+            {{/if}}
         </ul>
     </div>
 </nav>

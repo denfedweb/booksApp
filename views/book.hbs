@@ -4,6 +4,7 @@
     <span class="card-price big">{{book.price}}</span>
     <form action="/cart/add" method="post">
         <input type="hidden" name="id" value="{{book.id}}">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
         <button class="uk-button uk-button-default">add to cart</button>
     </form>
 </div>
