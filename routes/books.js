@@ -2,6 +2,7 @@ const {Router} = require("express");
 const Book = require("../models/book");
 const User = require("../models/user");
 const auth = require("../middleware/auth");
+const clearCache = require("../services/cache");
 const router = Router();
 
 router.get("/", async (req, res)=>{
@@ -58,7 +59,7 @@ router.post("/remove", auth, async (req, res)=>{
 router.get("/:id", async (req, res)=>{
     //есть баг - при невалидном src картинки req.params.id присылается повторно с src картнки
     try{
-        const book = await Book.findById(req.params.id);
+        const book = await Book.findById(req.params.id).cache(req.params.id);
         res.render('book', {
             layout: "empty",
             title: `Book ${book.title}`,

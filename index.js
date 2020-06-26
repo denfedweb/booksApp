@@ -1,4 +1,5 @@
 const express = require("express");
+const util = require('util');
 const Handlebars = require('handlebars')
 const exphbs = require("express-handlebars");
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
@@ -6,6 +7,7 @@ const helpers = require('handlebars-helpers')();
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
+const redis = require("redis");
 const csrf = require("csurf");
 const flash = require("connect-flash");
 const homeRoutes = require("./routes/home");
@@ -17,9 +19,11 @@ const authRoutes = require("./routes/auth");
 const path = require("path");
 const varMiddleware = require("./middleware/variables");
 const userSession = require("./middleware/user");
+const keys = require("./keys/index");
 
-//mongodb url to connect
-const MONGODB_URI = `mongodb+srv://denfedweb:6Bt83FUqp0dpUy18@clusterbookapp-fbgs9.mongodb.net/shop`;
+//mongodb url to connect and any variables
+const {MONGODB_URI, SESSION_SECRET} = keys;
+
 const app = express();
 
 //hbs
@@ -48,7 +52,7 @@ app.use(express.urlencoded({extended: true}));
 
 //session
 app.use(session({
-    secret:"some secret value",
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store

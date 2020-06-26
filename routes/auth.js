@@ -1,7 +1,16 @@
 const {Router} = require("express");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const sendGrid = require("nodemailer-sendgrid-transport");
+const keys = require("../keys/index");
+const regEmail = require("../emails/registration");
+
 const router = Router();
+
+const transporter = nodemailer.createTransport(sendGrid({
+    auth: {api_key: keys.SENDGRID_API_KEY}
+}))
 
 router.get("/login", (req, res)=>{
 
@@ -67,6 +76,9 @@ router.post("/register", async function(req, res){
             });
             await user.save();
             res.redirect("/auth/login");
+            //выполнится в фоне, что бы пользователь не ждал
+            //НЕ ОТПРАВЛЯЕТ ПИСЬМО
+            await transporter.sendMail(regEmail(register_email));
         }
     }catch (e) {
         console.log(e);

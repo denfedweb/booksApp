@@ -22,6 +22,9 @@
     "handlebars": "^4.7.6",
     "handlebars-helpers": "^0.10.0",
     "mongoose": "^5.9.11",
+    "nodemailer": "^6.4.6",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "redis": "^3.0.2",
     "uuid": "^7.0.3"
   },
   "devDependencies": {
